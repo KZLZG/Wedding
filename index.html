@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wedding Invitation</title>
+  <link rel="stylesheet" href="mainwed.css" />
+
+  <!-- (опционально) подключение вашего вензельного шрифта:
+  <link rel="preload" href="fonts/MyWeddingFont.woff2" as="font" type="font/woff2" crossorigin>
+  -->
+</head>
+<body>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title" class="hero__title font4">WEDDING</h1>
+      <p class="hero__date script font7">12.10.25</p>
+      <p class="hero__date script font7">Маша & Егор </p>
+
+      <!-- КОЛЛАЖ: два прямоугольных фото, пересекающихся уголками по диагонали -->
+      <section class="collage-angled" aria-labelledby="collage-title">
+        <!-- ТЕКСТ-ПРИГЛАШЕНИЕ ПОД ФОТО -->
+        <h2 id="collage-title" class="visually-hidden">Наши фото</h2>
+        <!-- ТЕКСТ-ПРИГЛАШЕНИЕ ПОД ФОТО -->
+
+        <!-- Фото A -->
+        <figure class="card card--a">
+          <img src="assets/we1.jpg" alt="Невеста" loading="lazy">
+        </figure>
+
+        <!-- Фото B -->
+        <figure class="card card--b">
+          <img src="assets/we2.jpg" alt="Мы вдвоём" loading="lazy">
+        </figure>
+      </section>
+      <!-- ТЕКСТ-ПРИГЛАШЕНИЕ ПОД ФОТО -->
+<p class="hero__invite script font9">
+  <!-- Здесь твой текст, например: -->
+  БУДЕМ СЧАСТЛИВЫ РАЗДЕЛИТЬ С ВАМИ ДЕНЬ НАШЕЙ СВАДЬБЫ! 
+</p>
+
+<section id="letter" class="letter" aria-labelledby="letter-title">
+  <h2 id="letter-title" class="visually-hidden">Письмо-приглашение</h2>
+
+  <div class="letter__wrap">
+    <!-- Левая страница -->
+    <figure class="letter__page letter__page--left">
+      <img src="assets/rings.png" alt="Декоративная картинка" loading="lazy">
+    </figure>
+
+    <!-- Правая страница -->
+    <div class="letter__page letter__page--right">
+      <p class="letter__pretitle font5">Родные и близкие! </p>
+         <p class="letter__text font5">
+        Мы рады пригласить вас на нашу свадьбу, которая состоится </p>
+         <p class="letter__text font5"> 12 октября 2025 года  </p>
+         <p class="letter__text font5"> во Дворце бракосочетания №4 по адресу:
+        г. Москва, Бутырская улица д.17
+      <br>
+      <br>
+      </p>
+        
+        <p class="letter__text font7"> <span class="text-acccent">Время, указанное в приглашении, является временем сбора гостей около ЗАГСа,
+        а НЕ началом регистрации!</span> </p>
+
+      </p>
+      <p class="letter__sign font9">Искренне ваши, Маша и Егор</p>
+    </div>
+  </div>
+</section>
+<!-- ===== РАЗДЕЛ: ПЕРЕМЕЩАЮЩИЕСЯ ПЛИТКИ ===== -->
+<section id="tiles" class="tiles" aria-labelledby="tiles-title">
+  <h2 id="tiles-title" class="tiles__title font4">О нашем дне</h2>
+
+  <!-- Обёртка карусели -->
+  <div class="tiles__viewport" aria-roledescription="карусель" aria-label="Плитки с информацией">
+    <ul class="tiles__track" id="tilesTrack">
+
+     <!-- Плитка 1: карта через iframe -->
+<li class="tile tile--map" aria-label="Карта и текст">
+  <h3 class="text-acccent font6">Место встречи</h3>
+  <figure class="tile__media tile__media--map">
+    <!-- ⚠️ вставь свой iframe из конструктора Яндекс.Карт -->
+    <iframe
+      class="tile-map"
+      src="https://yandex.ru/map-widget/v1/?um=constructor%3A46f37b1ce58db556267cd26f6663ae67b77bdc68fadbdc343117cd9eebd1162d&amp;source=constructor"
+      frameborder="0"
+      allowfullscreen
+      loading="lazy"
+      title="Место встречи на карте">
+    </iframe>
+  </figure>
+
+  <div class="tile__body">
+    
+    <p class="text-acccent font6">
+      Сбор гостей в <strong>15:30 около Дворца бракосочетания №4 </strong>. 
+  </div>
+</li>
+ <!-- Плитка 3: фото + текст (пример) -->
+      <li class="tile tile--photo" aria-label="Фото и текст">
+        <h3 class="text-acccent font6">ЦЕРЕМОНИЯ</h3>
+        <figure class="tile__media">
+          <img src="assets/flower.png" alt="Детали праздника" loading="lazy">
+          <figcaption class="visually-hidden">Фото</figcaption>
+        </figure>
+        <div class="tile__body">
+          
+          <p class="text-acccent font6">
+             Регистрация пройдет в течение часа после сбора гостей. Приходить заранее не нужно, 15:30 - оптимальное время.
+          </p>
+        </div>
+      </li>
+      <!-- Плитка 2: только текст -->
+      <li class="tile tile--text" aria-label="Текст">
+        <div class="tile__body">
+          <h3 class="text-acccent font6">Свадебный ужин</h3>
+          <p class="text-acccent font6">Наша свадьба будет камерной, поэтому на ней не предусмотрен ведущий, конкурсы и прочая атрибутика, привычная пышным торжествам. Вместо широкого банкета - ужин в кругу самых близких и родных нам людей. Ужин пройдет в ресторане по адресу: Москва, Преображенская площадь д.2
+          <br>  
+          Мы приглашаем вас отпраздновать важную дату в атмосфере любви и уюта
+        <br>
+        Пожалуйста, не утруждайте себя выбором наряда - выбирайте то, в чем вы будете чувствовать себя красивыми!</p>
+           
+        </div>
+      </li>
+    </ul>
+  <!-- Кнопки-сердечки -->
+  <div class="tiles__controls">
+    <button class="tiles__btn tiles__btn--prev" aria-label="Предыдущая плитка">
+      <!-- SVG сердечко -->
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="heart"><path d="M12 21s-5-3.6-8-6.6C1.7 12.1 1 9.9 2.5 8.1c1.7-2 4.7-1.8 6.4.1L12 11l3.1-2.8c1.7-1.9 4.7-2.1 6.4-.1 1.5 1.8.8 4-1.5 6.3C17 17.4 12 21 12 21z"/></svg>
+    </button>
+    <button class="tiles__btn tiles__btn--next" aria-label="Следующая плитка">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="heart"><path d="M12 21s-5-3.6-8-6.6C1.7 12.1 1 9.9 2.5 8.1c1.7-2 4.7-1.8 6.4.1L12 11l3.1-2.8c1.7-1.9 4.7-2.1 6.4-.1 1.5 1.8.8 4-1.5 6.3C17 17.4 12 21 12 21z"/></svg>
+    </button>
+  </div>
+</section>
+      
+    </section>
+  </main>
+  <script>
+  (function(){
+    const track = document.getElementById('tilesTrack');
+    const prev  = document.querySelector('.tiles__btn--prev');
+    const next  = document.querySelector('.tiles__btn--next');
+
+    function tileWidth(){
+      // ширина одной «колонки» + gap
+      const first = track.querySelector('.tile');
+      const styles = first ? getComputedStyle(track) : null;
+let gap = 0;
+
+// Проверяем, есть ли column-gap или gap — безопасно для всех браузеров
+if (styles) {
+  gap = parseFloat(styles.getPropertyValue('column-gap')) ||
+        parseFloat(styles.getPropertyValue('gap')) ||
+        0;
+}
+
+return first ? first.getBoundingClientRect().width + gap : track.clientWidth;
+    }
+
+    function scrollByTiles(dir){
+      track.scrollBy({ left: dir * tileWidth(), behavior: 'smooth' });
+    }
+
+    prev.addEventListener('click', ()=>scrollByTiles(-1));
+    next.addEventListener('click', ()=>scrollByTiles(1));
+
+    // клавиатура (←/→)
+    track.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowLeft')  scrollByTiles(-1);
+      if(e.key === 'ArrowRight') scrollByTiles(1);
+    });
+
+    // улучшение snap-позиции при ресайзе
+    let rAF;
+    window.addEventListener('resize', ()=>{
+      cancelAnimationFrame(rAF);
+      rAF = requestAnimationFrame(()=> {
+        track.scrollTo({ left: Math.round(track.scrollLeft / tileWidth()) * tileWidth(), behavior: 'instant' });
+      });
+    });
+  })();
+</script>
+</body>
+</html>

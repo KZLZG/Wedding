@@ -1,0 +1,603 @@
+/* ===== Палитра (пудрово-персиковый фон) ===== */
+:root{
+  --bg: #f6e4dc;          /* пудрово-бежевый, персиково-розовый подтон */
+  --text: #a47f6c;        /* тёплый коричневый для текста */
+  --accent: #a77c6b;      /* приглушённый акцент */
+  --tape: f6e4dc(255,255,255,.7);
+  --acccent: #c04949;
+  --shadow: 0 14px 34px rgba(90,63,50,.16);
+}
+
+/* ===== Ваш рукописный шрифт (замените URL при необходимости) ===== */
+@font-face{
+  font-family: 'Custom Script';
+  src: url('assets//MyWeddingFont.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+.script{ font-family: 'Custom Script', "Segoe Script", "Brush Script MT", cursive; }
+
+/* ===== База ===== */
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
+body{
+  margin: 0;
+  font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #f6e4dc 0%, var(--bg) 60%, #f6e4dc 100%);
+  /* лёгкий «воздух» без карточек */
+}
+
+/* Скрыто визуально, доступно скринридерам */
+.visually-hidden{
+  position: absolute!important; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+/* ===== Герой без плашек/рамок: всё по центру ===== */
+.hero{
+  min-height: 100svh;                 /* учитывает мобильные UI-панели */
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: clamp(20px, 6vw, 56px);
+  gap: clamp(6px, 3w, 14px);
+}
+
+.text-acccent {
+  color: var(--acccent); /* уже есть в палитре сайта */
+}
+
+.hero__title{
+  margin: 0 0 8px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-size: clamp(32px, 8.5vw, 80px);
+}
+
+.hero__date{
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-size: clamp(30px, 8vw, 60px);
+}
+
+/* ===== Коллаж: два прямоугольника, пересекаются уголками по диагонали ===== */
+.collage-angled{
+  position: relative;
+  width: min(100%, 980px);
+  margin: 0 auto;
+  height: auto;                       /* высота адаптируется через соотношения картинок */
+  display: grid;
+  place-items: center;
+  padding: clamp(6px, 1.5vw, 10px);   /* немного воздуха вокруг */
+}
+
+/* Общая карточка-фото (без полароидных рамок) */
+.card{
+  position: relative;
+  width: clamp(240px, 44vw, 520px);
+  aspect-ratio: 4/3;                  /* классический прямоугольник */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,.06);
+  background: #fff;
+  will-change: transform;
+}
+
+/* Изображение растягивается, не теряя композицию */
+.card img{
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+/* Наклейка-скотч сверху у каждого фото */
+.card::before{
+  content:"";
+  position: absolute;
+  top: -12px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+  width: clamp(90px, 22%, 150px);
+  height: 22px;
+  background: var(--tape);
+  border: 1px solid rgba(0,0,0,.05);
+  border-radius: 6px;
+  box-shadow: 0 10px 22px rgba(90,63,50,.12);
+}
+
+/* Раскладка и углы (десктоп/планшет) */
+.card--a{
+  transform: rotate(-7deg) translate(-6%, 6%);
+  z-index: 2;
+}
+.card--b{
+  transform: rotate(6deg) translate(6%, -6%);
+  z-index: 1;
+}
+
+/* Точное диагональное пересечение уголками:
+   чуть сдвигаем, чтобы правый верхний угол A заходил на левый нижний угол B */
+@media (min-width: 721px){
+  .collage-angled{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .card--a{ justify-self: end; margin-right: -6%; }
+  .card--b{ justify-self: start; margin-left: -6%; }
+}
+
+/* Ховер на десктопе — лёгкое приподнимание (не мешаем мобильным) */
+@media (hover: hover) and (pointer: fine){
+  .card:hover{ transform: translateY(-2px) scale(1.01) rotate(var(--r,0deg)); }
+}
+
+/* Мобильная раскладка: в столбик, мягкие наклоны и аккуратное пересечение */
+@media (max-width: 720px){
+  .collage-angled{ gap: 14px; }
+  .card{ width: min(92vw, 520px); }
+  .card--a{
+    transform: rotate(-3.5deg) translateY(6px);
+    margin-bottom: -10vw;       /* лёгкое наложение второго фото */
+  }
+  .card--b{
+    transform: rotate(3.5deg) translateY(-6px);
+  }
+  .card::before{ height: 18px; top: -10px; }
+}
+
+/* ===== Подключение локальных шрифтов ===== */
+
+/* 1-й шрифт (например, основной для текста) */
+@font-face {
+  font-family: 'Font1';
+  src: url('assets/1font.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 2-й шрифт (например, декоративный для заголовков) */
+@font-face {
+  font-family: 'Font2';
+  src: url('assets/2font.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 3-й шрифт (например, рукописный для даты/приглашения) */
+@font-face {
+  font-family: 'Font3';
+  src: url('assets/3font.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 4-й шрифт (например, для особых акцентов или подзаголовков) */
+@font-face {
+  font-family: 'Font4';
+  src: url('assets/4font.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 5-й шрифт */
+@font-face {
+  font-family: 'Font5';
+  src: url('assets/5font.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.font5 { font-family: 'Font5', sans-serif; }
+
+/* 6-й шрифт */
+@font-face {
+  font-family: 'Font6';
+  src: url('assets/6font.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.font6 { font-family: 'Font6', serif; }
+
+/* 7-й шрифт */
+@font-face {
+  font-family: 'Font7';
+  src: url('assets/7font.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.font7 { font-family: 'Font7', cursive; }
+
+/* 8-й шрифт */
+@font-face {
+  font-family: 'Font8';
+  src: url('assets/8font.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.font8 { font-family: 'Font8', sans-serif; }
+
+/* 9-й шрифт */
+@font-face {
+  font-family: 'Font9';
+  src: url('assets/9font.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.font9 { font-family: 'Font9', serif; }
+
+
+
+/* Классы для применения конкретных шрифтов */
+.font1 { font-family: 'Font1', sans-serif; }
+.font2 { font-family: 'Font2', serif; }
+.font3 { font-family: 'Font3', cursive; }
+.font4 { font-family: 'Font4', sans-serif; }
+
+
+/* Текст-приглашение под коллажем */
+.hero__invite{
+  margin: clamp(15px, 5vw, 30px) auto 0;
+  text-align: center;
+  max-width: 28ch;                 /* узкая «приглашательная» строка */
+  font-size: clamp(28px, 8vw, 38px);
+  line-height: 1.3;
+  color: var(--accent);            /* нежный коричнево-персиковый */
+}
+
+/* ===== Открытка с эффектом страниц ===== */
+.letter{
+  padding: clamp(24px, 6vw, 64px) clamp(12px, 4vw, 24px);
+}
+
+.letter__wrap{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  perspective: 1200px; /* для эффекта наклона страниц */
+}
+
+/* Общий стиль страниц */
+.letter__page{
+  background: #fffbe9; /* мягкий беж с оттенком бумаги */
+  background-image: radial-gradient(rgba(0,0,0,.02) 1px, transparent 1px);
+  background-size: 4px 4px;
+  border: 1px solid rgba(0,0,0,.05);
+  box-shadow: 0 8px 28px rgba(0,0,0,.15);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Левая страница — лёгкий наклон внутрь */
+.letter__page--left{
+  transform: rotateY(3deg);
+  transform-origin: right center;
+}
+.letter__page--left img{
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+/* Правая страница — лёгкий наклон внутрь */
+.letter__page--right{
+  padding: clamp(20px, 4vw, 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: rotateY(-3deg);
+  transform-origin: left center;
+}
+
+/* Складка посередине */
+.letter__wrap::before{
+  content:"";
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 2px;
+  background: linear-gradient(180deg,
+    rgba(0,0,0,.1),
+    rgba(255,255,255,.5) 40%,
+    rgba(0,0,0,.1) 100%);
+  transform: translateX(-1px);
+  pointer-events: none;
+}
+
+/* Декоративные уголки */
+.letter__page::after{
+  content:"";
+  position: absolute;
+  width: 24px; height: 24px;
+  background: linear-gradient(135deg, #e7d5c9, #fff);
+  border: 1px solid rgba(0,0,0,.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+}
+.letter__page--left::after{ top: 8px; left: 8px; border-radius: 4px 0 0 0; }
+.letter__page--right::after{ bottom: 8px; right: 8px; border-radius: 0 0 4px 0; }
+
+/* Тексты */
+.letter__pretitle{
+  margin: 0 0 12px;
+  font-size: clamp(18px, 3.6vw, 22px);
+  color: var(--accent);
+}
+.letter__text{
+  margin: 0 0 12px;
+  font-size: clamp(16px, 3.8vw, 20px);
+  line-height: 1.6;
+  color: var(--text);
+}
+.letter__sign{
+  margin-top: auto;
+  font-size: clamp(30px, 6vw, 38px);
+  color: var(--accent);
+  text-align: right;
+}
+
+/* Адаптив: на телефоне страницы одна под другой */
+@media (max-width: 820px){
+  .letter__wrap{
+    grid-template-columns: 1fr;
+    perspective: none;
+  }
+  .letter__page--left,
+  .letter__page--right{
+    transform: none;
+  }
+  .letter__wrap::before{ display: none; }
+}
+
+/* ===== Плитки-карусель (адаптив) ===== */
+.tiles{
+  padding: clamp(28px, 6vw, 72px) clamp(12px, 5vw, 24px);
+}
+.tiles__title{
+  text-align: center;
+  margin: 0 0 clamp(14px, 3vw, 22px);
+  font-size: clamp(22px, 5vw, 34px);
+  color: var(--text);
+}
+
+/* Вьюпорт и трек с snap-прокруткой (нормально для телефона) */
+.tiles__viewport{
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: hidden;              /* скрываем края при прокрутке */
+}
+.tiles__track{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 85%;
+  gap: clamp(12px, 3vw, 20px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 6px 6px 18px;
+}
+.tiles__track::-webkit-scrollbar{ display: none; }
+
+/* На планшете/десктопе плитки чуть шире (видно часть соседней) */
+@media (min-width: 900px){
+  .tiles__track{ grid-auto-columns: 48%; }
+}
+
+/* Плитка */
+.tile{
+  scroll-snap-align: center;
+  background: color-mix(in oklab, var(--bg, #F6E4DC), white 12%);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(90,63,50,.10);
+  display: grid;
+  overflow: clip;
+  min-height: 320px;
+}
+
+/* Фото + подпись */
+.tile__media{
+  margin: 0;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+.tile__media img{
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+.tile__body{
+  padding: clamp(16px, 3.2vw, 20px);   /* одинаковый «воздух» от картинки/карты */
+  display: grid;
+  gap: clamp(8px, 2vw, 12px);
+  align-content: start;
+}
+.tile__heading{
+  margin: 0;
+  font-size: clamp(18px, 3.8vw, 22px);
+  color: var(--text);
+}
+.tile__text{
+  margin: 0;
+  font-size: clamp(23px, 5vw, 20px);
+  line-height: 1.55;
+}
+
+/* Вариант «только текст» — делаем повыше и ровняем по центру по вертикали */
+.tile--text{
+  place-items: center;
+  margin: 0;
+  font-size: clamp(25px, 6vw, 30px);
+}
+.tile--text .tile__body{
+  align-content: center;
+  text-align: center;
+}
+
+/* Кнопки-сердечки (prev/next) */
+.tiles__controls{
+  position: relative;
+  max-width: 1100px;
+  margin: 8px auto 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 6px;
+}
+.tiles__btn{
+  border: none;
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 999px;
+  width: 48px; height: 48px;
+  display: grid; place-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(90,63,50,.12);
+  transition: transform .18s ease, background .18s ease;
+}
+.tiles__btn:hover{ transform: translateY(-1px); }
+.tiles__btn:active{ transform: translateY(0); }
+
+.heart{
+  width: 24px; height: 24px;
+  fill: var(--accent); /* тот же тёплый акцент, что и дата/приглашение */
+}
+
+/* На очень маленьких экранах — компактнее */
+@media (max-width: 420px){
+  .tiles__btn{ width: 42px; height: 42px; }
+  .heart{ width: 20px; height: 20px; }
+}
+
+.tile__media--map{
+  margin: 0;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  border-radius: 12px 12px 0 0;
+}
+.tile-map{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+@media (max-width: 600px){
+  .tile__media--map{ aspect-ratio: 4/5; }
+}
+
+/* Вьюпорт — оставить как было */
+.tiles__viewport{
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* === БЫЛО: grid-auto-flow: column; grid-auto-columns: ... ===
+   СТАЛО: flex + nowrap — надёжно, не переносит на 2-ю строку */
+.tiles__track{
+  display: flex;
+  flex-wrap: nowrap;              /* <-- ключ к проблеме переноса */
+  gap: clamp(12px, 3vw, 20px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 6px 6px 18px;
+}
+.tiles__track::-webkit-scrollbar{ display: none; }
+
+/* Ширина одной плитки: на мобиле ~85% окна, на десктопе ~48% */
+.tile{
+  flex: 0 0 85%;
+  scroll-snap-align: center;
+  background: color-mix(in oklab, var(--bg, #F6E4DC), white 12%);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(90,63,50,.10);
+  display: grid;
+  overflow: clip;
+  min-height: 320px;
+}
+@media (min-width: 900px){
+  .tile{ flex-basis: 48%; }
+}
+
+/* Фото/карта сверху, текст ниже — оставить как было */
+.tile__media{ margin: 0; aspect-ratio: 16/9; overflow: hidden; }
+.tile__media img, .tile-map{ width: 100%; height: 100%; display: block; border: 0; }
+/* одинаковый размер для заголовков и обычного текста */
+.tile__body h3,
+.tile__body p{
+  margin: 0;
+  font-size: clamp(18px, 3.6vw, 20px);
+  line-height: 1.55;
+}
+
+/* шаг между строками текста внутри карточки */
+.tile__body > * + *{
+  margin-top: clamp(8px, 2vw, 12px);
+}
+#tilesTrack .tile__body > h3{
+  /* убираем стандартный верхний margin у h3 */
+  margin-top: 0;
+}
+
+/* — Прячем горизонтальную полосу прокрутки кросс-браузерно — */
+#tilesTrack{
+  -ms-overflow-style: none;   /* IE/старый Edge */
+  scrollbar-width: none;      /* Firefox */
+}
+#tilesTrack::-webkit-scrollbar{
+  height: 0;                  /* WebKit */
+  display: none;
+}
+
+
+
+
+/* перестраховка: убираем верхний margin у первого текстового элемента */
+#tilesTrack .tile__body > :first-child{
+  margin-top: 0;
+}
+
+/* если хотите «вплотную» к карте — убираем разделительную линию у карты */
+#tilesTrack .tile__media--map{
+  border-bottom: none; /* раньше была 1px тонкая граница */
+}
+
+/* 1) Карточка не растягивает строки сетки и не навязывает лишнюю высоту */
+#tilesTrack .tile{
+  align-content: start;
+  min-height: 0;
+}
+
+/* 2) Медиа-блоки внутри трека: без принудительного aspect-ratio */
+#tilesTrack .tile__media,
+#tilesTrack .tile__media--map{
+  aspect-ratio: auto !important; /* перебиваем дубликаты выше */
+}
+
+/* 3a) Фото: ширина 100%, высота по содержимому */
+#tilesTrack .tile__media img{
+  width: 100%;
+  height: auto;           /* вместо 100% — не растягиваем контейнер */
+  display: block;
+  object-fit: contain;    /* чтобы PNG с пустыми полями не обрезался */
+}
+
+/* 3b) Карта: задаём вменяемую высоту вместо aspect-ratio */
+#tilesTrack .tile__media--map{
+  height: clamp(180px, 40vw, 300px);
+  border-bottom: none;    /* как просили — без линии под картой */
+  border-radius: 12px 12px 0 0;
+}
+#tilesTrack .tile-map{
+  height: 100% !important;
+}
